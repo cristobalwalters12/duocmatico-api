@@ -13,7 +13,7 @@ trait UseFirebaseUser
      * In case that there is a change in the firebase auth tool,
      * this credentials should be updated.
      */
-    public string $user_id = '4qVRFaULHRbXnESK7y0xoHKf02Q2';
+    public string $user_id = '1NnIHHRXaoStjVsfarNEm9Ujjf83';
     public string $user_name = 'Test-Duocmatico';
     public string $user_email = 'duocmatico-admin@example.net';
     public string $user_password = 'securePassword';
