@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Identifiers;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CareerIdentifier extends JsonResource
+class SubjectResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,9 @@ class CareerIdentifier extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => str_replace('-', ' ', $this->name),
-            'url' => 'Not implemented yet'
+            'code' => $this->code,
+            'name' => $this->name,
+            'level' => $this->level,
         ];
     }
 }

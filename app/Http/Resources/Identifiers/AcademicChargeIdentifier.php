@@ -16,7 +16,8 @@ class AcademicChargeIdentifier extends JsonResource
     {
         return [
             'id' => $this->id,
-            'full_name' => "{$this->name} {$this->year}-{$this->semester}",
+            'name' => str_replace('-', ' ', $this->name),
+            'season' => "{$this->year}-{$this->semester}",
             'url' => route('academic-charges.show', $this->id),
         ];
     }

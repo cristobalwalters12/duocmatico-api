@@ -7,32 +7,24 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 
 trait UseFirebaseUser
 {
-
-    /**
-     * This credentials are the ones from the firebase auth tool.
-     * In case that there is a change in the firebase auth tool,
-     * this credentials should be updated.
-     */
-    public string $user_id = '1NnIHHRXaoStjVsfarNEm9Ujjf83';
-    public string $user_name = 'Test-Duocmatico';
-    public string $user_email = 'duocmatico-admin@example.net';
-    public string $user_password = 'securePassword';
-
     /**
      * Creates the default test user from firebase auth, but
      * changes the roles to the ones provided in the array.
      */
-    public function createUserWithRoles(Array $roles): User
+    public function createUserWithRoles(Array $roles = null): User
     {
-        $user = User::factory()->create([
-            'id' => $this->user_id,
-            'name' => $this->user_name,  
-            'email' => $this->user_email
-        ]);
+        $user = $this->createUser();
 
-        $user->syncRoles($roles);
+        if ($roles) {
+            $user->syncRoles($roles);
+        }
 
         return $user;
+    }
+
+    public function createUser(): User
+    {
+        return User::create(['id' => env('FIREBASE_TEST_USER_UID')]);
     }
     
     /**
@@ -41,7 +33,9 @@ trait UseFirebaseUser
     public function actingAsFirebaseUser(): void
     {
         $auth = Firebase::auth();
-        $signInResult = $auth->signInWithEmailAndPassword($this->user_email, $this->user_password); 
+        $email = env('FIREBASE_TEST_USER_EMAIL');
+        $password = env('FIREBASE_TEST_USER_PASSWORD');
+        $signInResult = $auth->signInWithEmailAndPassword($email, $password); 
 
         $token = $signInResult->idToken();
         
