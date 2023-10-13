@@ -36,8 +36,8 @@ class FirebaseAuth
         // Verify the token
         $verifiedIdToken = $this->auth->verifyIdToken(
             $token,
-            $checkIfRevoked = true,
-            $leewayInSeconds = 3600 // Handle 1 hour of delay from the client
+            //$checkIfRevoked = true,
+            $leewayInSeconds = 3600*24 // Handle 1 hour of delay from the client
         );
         
         // Set the user in the request and proceed
